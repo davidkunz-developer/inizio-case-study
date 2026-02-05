@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Search API</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css?v=6">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Google Search API</h1>
+
+        <div class="search-box">
+            <input type="text" id="user_input" placeholder="Zadejte vyhledávací dotaz..." autocomplete="off">
+            <button id="search_button">Hledat</button>
+        </div>
+
+        <div class="error" id="error"></div>
+        <div class="loading" id="loading">⏳ Vyhledávám...</div>
+
+        <div class="actions" id="actions" style="display: none;">
+            <button id="btn_download_json" class="action-btn json-btn">Stáhnout JSON</button>
+            <button id="btn_download_excel" class="action-btn excel-btn">Stáhnout Excel</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <a href="/test-report" target="_blank" class="fixed-test-btn">Otestovat</a>
+    <script src="/static/script.js"></script>
+</body>
+
+</html>
