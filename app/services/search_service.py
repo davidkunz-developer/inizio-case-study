@@ -51,7 +51,7 @@ class SearchService:
             "gl": "cz"
         }
         
-        with httpx.Client(timeout=30.0) as client:
+        with httpx.Client(timeout=10.0) as client:
             response = client.get(self.SERPAPI_URL, params=params)
             response.raise_for_status()
             return response.json()
