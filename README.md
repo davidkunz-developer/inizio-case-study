@@ -58,6 +58,15 @@ Projekt obsahuje unit testy pro vyhledávání i export.
 pytest tests/ -v
 ```
 
+## Odolnost a ošetření chyb
+
+Aplikace je navržena s důrazem na stabilitu a uživatelskou zkušenost (UX). Implementuje mechanismus **Graceful Degradation**:
+
+- **Automatický Fallback:** Pokud selže komunikace s externím API (např. vyčerpaný limit, neplatný klíč nebo výpadek sítě), aplikace automaticky přepne do demo režimu a zobrazí lokální ukázková data.
+- **Informativní hlášky:** Uživatel je o každém problému informován prostřednictvím vizuálních upozornění přímo v rozhraní (např. "Limit vyhledávání vyčerpán - zobrazuji ukázková data").
+- **Timeouts:** Po 10 sekundách nečinnosti externího API aplikace automaticky ukončí čekání a přejde k náhradnímu řešení.
+- **Validace:** Veškeré vstupy i exporty jsou validovány, aby se předešlo neočekávaným pádům systému.
+
 ## Struktura projektu
 ```
 app/
