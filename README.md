@@ -58,6 +58,22 @@ Projekt obsahuje unit testy pro vyhledávání i export.
 pytest tests/ -v
 ```
 
+### Seznam unit testů
+
+| Název testu | Oblast | Co přesně ověřuje |
+| :--- | :--- | :--- |
+| `test_search_returns_search_response` | Vyhledávání | Zda služba vrací správný objekt `SearchResponse`. |
+| `test_search_response_has_correct_structure` | Vyhledávání | Přítomnost všech povinných polí v odpovědi (datum, zdroj, výsledky). |
+| `test_search_results_are_search_result_instances` | Vyhledávání | Správné formátování každého jednotlivého výsledku (SearchResult). |
+| `test_search_result_positions_are_sequential` | Vyhledávání | Zachování správného pořadí pozic (1, 2, 3...) z výsledků Googlu. |
+| `test_total_returned_matches_results_length` | Vyhledávání | Soulad mezi nahlášeným počtem výsledků a skutečnou délkou seznamu. |
+| `test_fetched_at_is_utc` | Vyhledávání | Zajištění, že čas vyhledávání je vždy v mezinárodním formátu UTC. |
+| `test_parse_organic_results_with_empty_items` | Odolnost | Bezpečné zpracování situace, kdy Google nevrátí žádné výsledky. |
+| `test_parse_organic_results_with_missing_key` | Odolnost | Stabilita parsování v případě, že JSON od API má neočekávanou strukturu. |
+| `test_parse_organic_results_with_valid_data` | Odolnost | Správný převod surového JSONu na vyčištěný seznam výsledků. |
+| `test_parse_organic_results_with_missing_snippet` | Odolnost | Funkčnost aplikace i v případě, že u výsledku chybí popisek (snippet). |
+| `test_export_excel_endpoint` | Export | Schopnost backendu vygenerovat a poslat Excel soubor ke stažení. |
+
 ## Odolnost a ošetření chyb
 
 Aplikace je navržena s důrazem na stabilitu a uživatelskou zkušenost (UX). Implementuje mechanismus **Graceful Degradation**:
