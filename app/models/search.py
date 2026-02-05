@@ -15,3 +15,4 @@ class SearchResponse(BaseModel):
     provider: str = Field(default="serpapi")
     total_returned: int = Field(...)
     results: list[SearchResult] = Field(default_factory=list)
+    warning: str | None = Field(None)

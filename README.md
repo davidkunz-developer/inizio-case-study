@@ -72,6 +72,7 @@ pytest tests/ -v
 | `test_parse_organic_results_with_missing_key` | Odolnost | Stabilita parsování v případě, že JSON od API má neočekávanou strukturu. |
 | `test_parse_organic_results_with_valid_data` | Odolnost | Správný převod surového JSONu na vyčištěný seznam výsledků. |
 | `test_parse_organic_results_with_missing_snippet` | Odolnost | Funkčnost aplikace i v případě, že u výsledku chybí popisek (snippet). |
+| `test_search_fallback_on_api_error` | Odolnost | Ověřuje automatické přepnutí na demo data při jakémkoliv selhání externího API. |
 | `test_export_excel_endpoint` | Export | Schopnost backendu vygenerovat a poslat Excel soubor ke stažení. |
 
 ## Odolnost a ošetření chyb

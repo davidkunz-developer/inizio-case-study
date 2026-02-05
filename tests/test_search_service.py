@@ -29,7 +29,7 @@ def test_search_returns_search_response(search_service):
     
     assert isinstance(result, SearchResponse)
     assert result.query == search_query
-    assert result.provider == "serpapi"
+    assert result.provider == "mock"
 
 
 def test_search_response_has_correct_structure(search_service):
@@ -173,6 +173,22 @@ def test_parse_organic_results_with_missing_snippet(search_service):
     assert results[0].snippet is None
 
 
-# TODO: Přidat testy pro skutečné API volání s mockem httpx
-# TODO: Přidat testy pro error handling
-# TODO: Přidat testy pro rate limiting (až bude implementováno)
+from unittest.mock import patch
+import httpx
+
+def test_search_fallback_on_api_error(search_service):
+    """
+    Test, že při chybě API (např. timeout) se aktivuje fallback na mock data.
+    """
+    # Nasimulujeme situaci, kdy je API aktivní, ale vyhodí chybu
+    search_service.use_real_api = True
+    
+    # Pomocí 'patch' vynutíme, aby _call_serpapi vyhodila TimeoutException
+    with patch.object(search_service, '_call_serpapi', side_effect=httpx.TimeoutException("Timeout!")):
+        result = search_service.search("test query")
+        
+        # Ověříme, že i přes chybu máme výsledky (z mocku)
+        assert result.provider == "serpapi-fallback"
+        assert len(result.results) > 0
+        assert "Vyhledávací služba neodpověděla včas" in result.warning
+        assert search_service.fallback_mode is True

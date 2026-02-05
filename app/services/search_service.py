@@ -12,6 +12,8 @@ class SearchService:
 
     def __init__(self):
         self.api_key = os.getenv("SERPAPI_API_KEY")
+        self.fallback_mode = False
+        self.last_error = None
         
         self.use_real_api = bool(
             self.api_key and 
@@ -25,19 +27,46 @@ class SearchService:
         raw_json = self._fetch_from_serpapi(search_query)
         search_results = self._parse_organic_results(raw_json)
 
+        provider_name = "serpapi"
+        if not self.use_real_api:
+            provider_name = "mock"
+        elif self.fallback_mode:
+            provider_name = "serpapi-fallback"
+
         search_response = SearchResponse(
             query=search_query,
             fetched_at=datetime.now(timezone.utc),
-            provider="serpapi",
+            provider=provider_name,
             total_returned=len(search_results),
-            results=search_results
+            results=search_results,
+            warning=self.last_error
         )
 
         return search_response
 
     def _fetch_from_serpapi(self, search_query: str) -> dict:
         if self.use_real_api:
-            return self._call_serpapi(search_query)
+            try:
+                return self._call_serpapi(search_query)
+            except httpx.HTTPStatusError as e:
+                self.fallback_mode = True
+                if e.response.status_code == 401:
+                    self.last_error = "Neplatný API klíč. Zkontrolujte prosím nastavení."
+                elif e.response.status_code == 402:
+                    self.last_error = "Limit vyhledávání pro tento měsíc byl vyčerpán."
+                elif e.response.status_code == 429:
+                    self.last_error = "Příliš mnoho požadavků. Zkuste to prosím za chvíli."
+                else:
+                    self.last_error = f"Externí API vrátilo chybu {e.response.status_code}. Zobrazuji ukázková data."
+                return self._get_mock_data()
+            except httpx.TimeoutException:
+                self.fallback_mode = True
+                self.last_error = "Vyhledávací služba neodpověděla včas (Timeout). Zobrazuji ukázková data."
+                return self._get_mock_data()
+            except httpx.RequestError:
+                self.fallback_mode = True
+                self.last_error = "Problém s připojením k síti. Zobrazuji ukázková data."
+                return self._get_mock_data()
         else:
             return self._get_mock_data()
 

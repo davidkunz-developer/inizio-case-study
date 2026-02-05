@@ -37,6 +37,14 @@ async function performSearch() {
 
         currentSearchData = search_response;
 
+        // Pokud máme varování (fallback), zobrazíme ho, ale nesmažeme výsledky
+        if (search_response.warning) {
+            errorElement.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${search_response.warning}`;
+            errorElement.classList.add('active');
+        } else {
+            hideError();
+        }
+
         displayResults(search_response);
 
         if (search_response.results.length > 0) {
@@ -155,8 +163,9 @@ function hideLoading() {
 }
 
 function showError(message) {
-    errorElement.textContent = message;
+    errorElement.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
     errorElement.classList.add('active');
+    resultsElement.innerHTML = '';
 }
 
 function hideError() {

@@ -14,19 +14,5 @@ async def search(user_input: str = Query(..., min_length=1)):
     
     try:
         return search_service.search(user_input.strip())
-    except httpx.HTTPStatusError as e:
-        if e.response.status_code == 401:
-            detail = "Neplatný API klíč pro vyhledávací službu."
-        elif e.response.status_code == 402:
-            detail = "Limit vyhledávání pro tento měsíc byl vyčerpán."
-        elif e.response.status_code == 429:
-            detail = "Příliš mnoho požadavků najednou. Zkuste to prosím za chvíli."
-        else:
-            detail = f"Chyba vyhledávací služby: {e.response.status_code}"
-        raise HTTPException(status_code=e.response.status_code, detail=detail)
-    except httpx.TimeoutException:
-        raise HTTPException(status_code=504, detail="Vyhledávací služba neodpověděla včas. Zkuste to prosím znovu.")
-    except httpx.RequestError:
-        raise HTTPException(status_code=503, detail="Vyhledávací služba je momentálně nedostupná (problém s připojením).")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Neočekávaná chyba: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Neočekávaná chyba serveru: {str(e)}")
