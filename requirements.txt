@@ -8,3 +8,5 @@ pytest-asyncio==0.23.0
 pytest-cov==4.1.0
 pandas==2.2.0
 pytest-html
+openpyxl==3.1.2
+jinja2==3.1.3
