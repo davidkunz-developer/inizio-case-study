@@ -21,7 +21,8 @@ class SearchService:
         )
         
         if not self.use_real_api:
-            print("SerpAPI klíč není nastaven. Používám mock data.")
+            self.last_error = "API klíč (SERPAPI_API_KEY) nebyl nalezen v konfiguraci. Aplikace běží v demo režimu s lokálními daty."
+            print(f"DEBUG: {self.last_error}")
 
     def search(self, search_query: str) -> SearchResponse:
         raw_json = self._fetch_from_serpapi(search_query)
