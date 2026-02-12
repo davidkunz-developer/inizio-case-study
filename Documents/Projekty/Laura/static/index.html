@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laura - Asistentka Davida Kunze</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --accent: #d4af37;
+            /* Gold for premium look */
+            --bg: #f5f5f7;
+            --chat-bg: #ffffff;
+            --text: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #chat-container {
+            width: 100%;
+            max-width: 500px;
+            height: 80vh;
+            background: var(--chat-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .status-info h1 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .status-info p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--primary);
+            color: white;
+            border-bottom-right-radius: 2px;
+        }
+
+        .ai-message {
+            align-self: flex-start;
+            background: #f0f0f0;
+            color: var(--text);
+            border-bottom-left-radius: 2px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .typing {
+            font-style: italic;
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+        #input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #333;
+        }
+
+        button svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Custom Scrollbar */
+        #messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        #messages::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="chat-container">
+        <header>
+            <div class="avatar">L</div>
+            <div class="status-info">
+                <h1>Laura</h1>
+                <p>Profesionální asistentka Davida Kunze</p>
+            </div>
+        </header>
+
+        <div id="messages">
+            <div class="message ai-message">
+                Dobrý den, jsem Laura, Davidova AI asistentka. Mohu Vám poskytnout informace o Davidovi nebo rovnou
+                domluvit schůzku. S čím Vám mohu pomoci?
+            </div>
+        </div>
+
+        <div id="typing" class="typing" style="padding: 0 20px 10px 20px;">Laura píše...</div>
+
+        <form id="input-area">
+            <input type="text" id="user-input" placeholder="Napište mi..." autocomplete="off">
+            <button type="submit">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
+            </button>
+        </form>
+
+        <div id="state-debug"
+            style="padding: 10px; background: #eee; border-top: 1px solid #ddd; font-family: monospace; font-size: 0.75rem; color: #555; white-space: pre-wrap;">
+            State: {}
+        </div>
+    </div>
+
+    <script>
+        const messagesContainer = document.getElementById('messages');
+        const chatForm = document.getElementById('input-area');
+        const userInput = document.getElementById('user-input');
+        const typingIndicator = document.getElementById('typing');
+        const stateDebug = document.getElementById('state-debug');
+
+        let history = [];
+        let currentTopic = null;
+        let currentQuestion = null;
+        let currentMeetingType = null;
+        let currentMeetingDate = null;
+        let currentMeetingTime = null;
+        let currentMeetingDuration = 60;
+        let currentMeetingEmail = null;
+        let currentMeetingPhone = null;
+        let currentDateNow = null;
+
+        function updateStateDebug() {
+            stateDebug.textContent = `State: ${JSON.stringify({
+                topic: currentTopic,
+                question: currentQuestion,
+                meeting_type: currentMeetingType,
+                meeting_date: currentMeetingDate,
+                meeting_time: currentMeetingTime,
+                meeting_duration: currentMeetingDuration,
+                meeting_email: currentMeetingEmail,
+                meeting_phone: currentMeetingPhone,
+                date_now: currentDateNow
+            }, null, 2)}`;
+        }
+
+        function addMessage(content, role) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${role === 'user' ? 'user-message' : 'ai-message'}`;
+            msgDiv.textContent = content;
+            messagesContainer.appendChild(msgDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            if (content !== "Laura píše...") {
+                history.push({ role, content });
+            }
+        }
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'user');
+            userInput.value = '';
+
+            typingIndicator.style.display = 'block';
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            try {
+                const response = await fetch('http://localhost:8021/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message,
+                        history,
+                        topic: currentTopic,
+                        question: currentQuestion,
+                        meeting_type: currentMeetingType,
+                        meeting_date: currentMeetingDate,
+                        meeting_time: currentMeetingTime,
+                        meeting_duration: currentMeetingDuration,
+                        meeting_email: currentMeetingEmail,
+                        meeting_phone: currentMeetingPhone,
+                        date_now: currentDateNow
+                    })
+                });
+
+                const data = await response.json();
+                typingIndicator.style.display = 'none';
+
+                if (data.response) {
+                    addMessage(data.response, 'ai');
+                    // Aktualizace stavu z backendu
+                    currentTopic = data.topic;
+                    currentQuestion = data.question;
+                    currentMeetingType = data.meeting_type;
+                    currentMeetingDate = data.meeting_date;
+                    currentMeetingTime = data.meeting_time;
+                    currentMeetingDuration = data.meeting_duration;
+                    currentMeetingEmail = data.meeting_email;
+                    currentMeetingPhone = data.meeting_phone;
+                    currentDateNow = data.date_now;
+                    updateStateDebug();
+                } else {
+                    addMessage("Omlouvám se, došlo k chybě při spojení s Laurou.", 'ai');
+                }
+            } catch (error) {
+                typingIndicator.style.display = 'none';
+                addMessage("Omlouvám se, server Laury není dostupný.", 'ai');
+            }
+        });
+
+        // Initial state display
+        updateStateDebug();
+    </script>
+
+</body>
+
+</html>

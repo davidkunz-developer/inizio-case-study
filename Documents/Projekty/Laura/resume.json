@@ -1,0 +1,196 @@
+{
+  "person": {
+    "full_name": "David Kunz",
+    "headline_roles": [
+      "Scrum Master",
+      "Projektový manažer",
+      "Team Leader"
+    ],
+    "contact": {
+      "phone": "606 243 770",
+      "email": "d.kunz@email.cz",
+      "linkedin": "LinkedIn"
+    }
+  },
+  "profile_summary": {
+    "short": "Projektové řízení a vedení týmů je mojí vášní. Zaměřuji se na spolupráci, efektivitu a dosažení společných cílů.",
+    "values": [
+      "profesionalita",
+      "odbornost",
+      "empatie",
+      "loajalita"
+    ],
+    "long": "Jsem nadšený do projektového plánování a následné realizace. Mou silnou stránkou je orientace na efektivní spolupráci v rámci týmu a zefektivňování procesů. Ve své práci kombinuji selský rozum, praktické uvažování a osvědčené postupy s prvky scrumu. Dokážu být silným lídrem, jít týmu příkladem disciplínou, pracovitostí a orientací na detail. Kritiku vnímám jako nástroj ke zlepšení."
+  },
+  "experience": [
+    {
+      "company": "4fin Better Together",
+      "position": "Senior Konzultant",
+      "period": {
+        "from": "2024-04",
+        "to": "2024-06"
+      },
+      "domain": "Finanční poradenství",
+      "responsibilities": [
+        "Odborné finanční poradenství v oblasti pojištění, investic, úvěrů a penzí",
+        "Akvizice nových klientů",
+        "Konzultace a schůzky s klienty",
+        "Analýza potřeb klientů",
+        "Návrh optimálního řešení",
+        "Finanční koučing",
+        "Následná péče o klienty"
+      ],
+      "skills_used": [
+        "komunikace s klienty",
+        "analytické myšlení",
+        "prezentační dovednosti",
+        "budování vztahů"
+      ]
+    },
+    {
+      "company": "Decathlon",
+      "position": "Vedoucí překladatelského týmu & Národní lídr pro golf",
+      "period": {
+        "from": "2021-09",
+        "to": "2024-02"
+      },
+      "domain": "Leadership, strategie, retail",
+      "responsibilities": [
+        "Vedení týmu překladatelů",
+        "Nastavení systému efektivní a samostatné práce",
+        "Optimalizace nákladů",
+        "Odpovědnost za národní strategii pro golf",
+        "Podpora prodejen při realizaci strategií",
+        "Odpovědnost za ekonomické výsledky"
+      ],
+      "skills_used": [
+        "vedení týmu",
+        "strategické plánování",
+        "procesní optimalizace",
+        "finanční odpovědnost",
+        "mezioborová spolupráce"
+      ]
+    },
+    {
+      "company": "Decathlon",
+      "position": "Webmarketer & SEO Leader",
+      "period": {
+        "from": "2019-07",
+        "to": "2021-08"
+      },
+      "domain": "Marketing, SEO",
+      "responsibilities": [
+        "Správa webových stránek",
+        "Řízení projektů optimalizace svěřených sportů",
+        "Vedení SEO týmu",
+        "Spolupráce s externím SEO konzultantem",
+        "Tvorba SEO obsahu",
+        "Spolupráce na obchodních strategiích pro ČR"
+      ],
+      "skills_used": [
+        "SEO",
+        "digitální marketing",
+        "projektové řízení",
+        "tvorba obsahu",
+        "datová analýza"
+      ]
+    },
+    {
+      "company": "Decathlon",
+      "position": "Zástupce ředitele prodejny",
+      "period": {
+        "from": "2017-07",
+        "to": "2018-06"
+      },
+      "domain": "Retail management",
+      "responsibilities": [
+        "Řízení provozu prodejny (6 500 m², cca 100 zaměstnanců)",
+        "Spolupráce na marketingové strategii",
+        "Vedení zákaznického servisu",
+        "Vedení vedoucích oddělení",
+        "Realizace obchodní strategie",
+        "Školení zaměstnanců"
+      ],
+      "skills_used": [
+        "people management",
+        "řízení provozu",
+        "strategické myšlení",
+        "školení a rozvoj lidí"
+      ]
+    },
+    {
+      "company": "Decathlon",
+      "position": "Vedoucí oddělení",
+      "period": {
+        "from": "2015-07",
+        "to": "2017-06"
+      },
+      "domain": "Retail leadership",
+      "responsibilities": [
+        "Vedení týmu 15 prodavačů",
+        "Realizace obchodní strategie",
+        "Odpovědnost za ekonomické výsledky",
+        "Autonomní vedení oddělení",
+        "Samostatné rozhodování"
+      ],
+      "skills_used": [
+        "vedení týmu",
+        "ekonomická odpovědnost",
+        "rozhodování",
+        "operativní řízení"
+      ]
+    }
+  ],
+  "skills": {
+    "leadership": [
+      "vedení týmu",
+      "motivace lidí",
+      "týmová dynamika",
+      "předávání znalostí"
+    ],
+    "project_and_process": [
+      "projektové řízení",
+      "scrum a agilní přístup",
+      "procesní optimalizace",
+      "orientace na detail"
+    ],
+    "soft_skills": [
+      "prezentační dovednosti",
+      "komplexní řešení problémů",
+      "komunikace",
+      "kreativita"
+    ]
+  },
+  "languages": [
+    {
+      "language": "Angličtina",
+      "level": "Pokročilá"
+    },
+    {
+      "language": "Španělština",
+      "level": "Pokročilá"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Scrum Master II (Advanced Scrum Master)",
+      "issuer": "TayllorCox"
+    }
+  ],
+  "ai_usage_hints": {
+    "recommended_chunk_keys": [
+      "profile_summary",
+      "experience[].responsibilities",
+      "experience[].skills_used",
+      "skills",
+      "certifications"
+    ],
+    "primary_use_cases": [
+      "AI profesní asistent",
+      "HR screening",
+      "odpovědi na dotazy o zkušenostech",
+      "career matching",
+      "projektové doporučení"
+    ]
+  }
+}
